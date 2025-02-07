@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" />
+
+<title>random sounds</title>
+<script src='wavs.js'> </script> <!-- load all sounds -->
+
+<script>
+auds=[];
+for(i=0;i<wavs.length;i++){
+  auds.push(new Audio('wavs/'+wavs[i]));
+}
+
+var stopped=true;
+
+function looprand(){
+    if(!stopped){
+        var item = auds[Math.floor(Math.random() * auds.length)];        
+        item.play();
+        setTimeout(looprand,Math.floor(Math.random() * 3000));
+    }    
+}
+
+function doplay(){
+    elplay=document.getElementById('play');
+    stopped=!stopped;
+    if(stopped){        
+        elplay.innerHTML='play';
+    }
+    else{
+       elplay.innerHTML='pause';
+       looprand();
+    }
+}                   
+</script>
+</head>
+<body>
+  <button id=play onclick="doplay();">play</button>
+</body>
+</html> 
